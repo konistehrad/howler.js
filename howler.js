@@ -113,18 +113,21 @@
 
   // setup the audio context
   var ctx = null,
-    usingWebAudio = true,
+    usingWebAudio = false, // XXX
     noAudio = false;
-  try {
-    if (typeof AudioContext !== 'undefined') {
-      ctx = new AudioContext();
-    } else if (typeof webkitAudioContext !== 'undefined') {
-      ctx = new webkitAudioContext();
-    } else {
+
+  if( usingWebAudio ) {
+    try {
+      if (typeof AudioContext !== 'undefined') {
+        ctx = new AudioContext();
+      } else if (typeof webkitAudioContext !== 'undefined') {
+        ctx = new webkitAudioContext();
+      } else {
+        usingWebAudio = false;
+      }
+    } catch(e) {
       usingWebAudio = false;
     }
-  } catch(e) {
-    usingWebAudio = false;
   }
 
   if (!usingWebAudio) {
