@@ -113,7 +113,7 @@
 
   // setup the audio context
   var ctx = null,
-    usingWebAudio = false, // XXX
+    usingWebAudio = true, // XXX
     noAudio = false;
 
   if( usingWebAudio ) {
